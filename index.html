@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@100;200;300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Jost', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #0f172a;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            padding: 200px 10px;
+        }
+
+        #square {
+            height: 720px;
+            width: 1280px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+            position: relative;
+            /* background: white; */
+        }
+        
+        h1 {
+            font-size: 7rem;
+            font-weight: 800;
+        }
+
+        p {
+            font-size: 4rem;
+            font-weight: 400;
+            line-height: 1rem;
+        }
+
+        h1, p {
+            position: relative;
+            z-index: 50;
+        }
+
+        span {
+            position: absolute;
+            background: transparent;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: spin linear infinite;
+        }
+
+        span div {
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-radius: 50%;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="square">
+        <h1>ORBITAL</h1>
+        <p>LOADING PAGE</p>
+    </div>
+    <script>
+        const numOfPlanets = 50
+        var colorArray = ['aliceblue', 'aqua', 'aquamarine', 'azure', 'blueviolet', 'blue', 'cadetblue', 'chartreuse', 'coral', 'cornflowerblue', 'cyan', 'crimson', 'darkblue', 'darkcyan', 'darkgoldenrod', 'darkmagenta', 'darkseagreen', 'darkorange', 'darkslateblue', 'darkorchid', 'darkslategray', 'darkturquoise', 'deeppink', 'darkviolet', 'dodgerblue', 'floralwhite', 'fuchsia', 'gold', 'greenyellow', 'honeydew', 'hotpink', 'indigo', 'lawngreen', 'lightblue', 'lightcyan', 'lightgreen', 'lightskyblue', 'lightsalmon', 'lightseagreen', 'mediumslateblue', 'mediumpurple', 'midnightblue', 'paleturquoise', 'palegreen'];
+
+
+        const squareDiv = document.getElementById('square')
+        for (let i = 0; i < numOfPlanets; i++) {
+            const childToAppend = document.createElement('span')
+            squareDiv.appendChild(childToAppend)
+        }
+
+        const spans = document.querySelectorAll('span')
+        spans.forEach(span => {
+            const randHeight = Math.random() * 460 + 0.8 * 720
+            const randWidth = Math.random() * 740 + 0.8 * 400
+            span.style.height = `${randHeight}px`
+            span.style.width = `${randWidth}px`
+
+            const randInterval = Math.floor(Math.random() * 10000 + 10000)
+            const randDelay = Math.floor(Math.random() * 20000)
+            span.style.animationDuration = `${randInterval}ms`
+            span.style.animationDelay = `-${randDelay}ms`
+
+            const childNode = document.createElement('div')
+            const divRadius = Math.random() * 10 + 2
+            childNode.style.height = `${divRadius}px`
+            childNode.style.width = `${divRadius}px`
+
+            const lengthOfColors = colorArray.length
+            const randomColorIndex = Math.floor(Math.random() * lengthOfColors)
+            const randomColor = colorArray[randomColorIndex]
+            childNode.style.background = randomColor
+            childNode.style.boxShadow = `0 0 1px 1px ${randomColor}`
+
+
+            span.appendChild(childNode)
+
+        })
+    </script>
+</body>
+
+</html>
